@@ -1,0 +1,11 @@
+node_modules/
+dist/
+out/
+client/out/
+server/out/
+shared/out/
+*.vsix
+*.tsbuildinfo
+.vscode/
+tools/stdlib-gen/bin/
+tools/stdlib-gen/obj/

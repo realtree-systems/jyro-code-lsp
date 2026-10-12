@@ -1,0 +1,36 @@
+# Source files (bundled into dist/)
+client/**
+server/**
+shared/**
+**/*.ts
+**/*.map
+
+# Config files
+.vscode/**
+.vscode-test/**
+tsconfig.json
+esbuild.js
+eslint.config.mjs
+
+# Dependencies (bundled into dist/)
+node_modules/**
+
+# Git
+.git/**
+.gitignore
+
+# Build artifacts not needed
+*.vsix
+
+# The standard library generator
+tools/**
+
+# Test files
+example.jyro
+scripts/**
+
+# Claude config (not needed in extension)
+.claude/**
+
+# Stray build artifacts
+out/**

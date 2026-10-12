@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Generates shared/src/stdlib.generated.ts from a Jyro checkout: the
+    functions StdlibRegistry.GetAll() gives, joined with the Jyro.Stdlib.xml
+    documentation built beside them. Run through `npm run generate:stdlib`,
+    which passes JyroDir (default: the sibling checkout ../jyro).
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RollForward>Major</RollForward>
+    <JyroDir Condition="'$(JyroDir)' == ''">$(MSBuildThisFileDirectory)..\..\..\jyro</JyroDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(JyroDir)\src\Jyro.Stdlib\Jyro.Stdlib.fsproj" />
+  </ItemGroup>
+
+</Project>

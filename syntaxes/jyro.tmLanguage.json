@@ -1,0 +1,288 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Jyro",
+  "scopeName": "source.jyro",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#property" },
+    { "include": "#func-definition" },
+    { "include": "#union-definition" },
+    { "include": "#type-hint" },
+    { "include": "#type-test" },
+    { "include": "#keywords" },
+    { "include": "#constants" },
+    { "include": "#numbers" },
+    { "include": "#io-keywords" },
+    { "include": "#stdlib-functions" },
+    { "include": "#function-calls" },
+    { "include": "#operators" },
+    { "include": "#variables" },
+    { "include": "#punctuation" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.jyro",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.jyro",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [{ "include": "#escapes" }]
+        },
+        {
+          "name": "string.quoted.single.jyro",
+          "begin": "'",
+          "end": "'",
+          "patterns": [{ "include": "#escapes" }]
+        }
+      ]
+    },
+    "escapes": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.jyro",
+          "match": "\\\\([nrt0\"'\\\\]|u[0-9A-Fa-f]{4})"
+        },
+        {
+          "name": "invalid.illegal.unrecognized-escape.jyro",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "property": {
+      "comment": "A name after a dot is a property, keywords included: Input.end",
+      "patterns": [
+        {
+          "match": "(\\.)\\s*([\\p{L}_][\\p{L}\\p{Nd}_]*)",
+          "captures": {
+            "1": { "name": "punctuation.accessor.jyro" },
+            "2": { "name": "variable.other.property.jyro" }
+          }
+        }
+      ]
+    },
+    "func-definition": {
+      "patterns": [
+        {
+          "match": "\\b(func)\\s+([\\p{L}_][\\p{L}\\p{Nd}_]*)",
+          "captures": {
+            "1": { "name": "keyword.control.flow.jyro" },
+            "2": { "name": "entity.name.function.definition.jyro" }
+          }
+        }
+      ]
+    },
+    "union-definition": {
+      "patterns": [
+        {
+          "match": "\\b(union)\\s+([\\p{L}_][\\p{L}\\p{Nd}_]*)",
+          "captures": {
+            "1": { "name": "keyword.control.flow.jyro" },
+            "2": { "name": "entity.name.type.union.jyro" }
+          }
+        }
+      ]
+    },
+    "type-hint": {
+      "comment": "A type after a colon; any and function are types only here and after is",
+      "patterns": [
+        {
+          "match": "(:)\\s*\\b(any|number|string|boolean|object|array|function)\\b(?!\\s*:)",
+          "captures": {
+            "1": { "name": "keyword.operator.type.annotation.jyro" },
+            "2": { "name": "storage.type.jyro" }
+          }
+        }
+      ]
+    },
+    "type-test": {
+      "patterns": [
+        {
+          "match": "\\b(is)\\s+(?:(not)\\s+)?\\b(any|number|string|boolean|object|array|null|function)\\b",
+          "captures": {
+            "1": { "name": "keyword.operator.logical.jyro" },
+            "2": { "name": "keyword.operator.logical.jyro" },
+            "3": { "name": "storage.type.jyro" }
+          }
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.flow.jyro",
+          "match": "\\b(if|then|else|elseif|end|while|do|for|foreach|in|to|downto|by|switch|case|default|return|fail|break|continue|func|union|match|exit|delete)\\b"
+        },
+        {
+          "name": "keyword.declaration.jyro",
+          "match": "\\b(var)\\b"
+        },
+        {
+          "name": "keyword.operator.logical.jyro",
+          "match": "\\b(and|or|not|is)\\b"
+        },
+        {
+          "name": "storage.type.jyro",
+          "match": "\\b(number|string|boolean|object|array)\\b"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.jyro",
+          "match": "\\b(true|false)\\b"
+        },
+        {
+          "name": "constant.language.null.jyro",
+          "match": "\\b(null)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.jyro",
+          "match": "\\b0[xX][0-9A-Fa-f]+\\b"
+        },
+        {
+          "name": "constant.numeric.binary.jyro",
+          "match": "\\b0[bB][01]+\\b"
+        },
+        {
+          "name": "constant.numeric.decimal.jyro",
+          "match": "\\b(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?\\b"
+        },
+        {
+          "name": "invalid.illegal.numeric.jyro",
+          "match": "\\b[0-9][\\p{L}\\p{Nd}_.]*"
+        }
+      ]
+    },
+    "io-keywords": {
+      "patterns": [
+        {
+          "name": "variable.language.io.jyro",
+          "match": "\\b(Input|Output)\\b"
+        }
+      ]
+    },
+    "stdlib-functions": {
+      "comment": "Generated by tools/generate-stdlib.mjs from the standard library",
+      "patterns": [
+        {
+          "match": "\\b(ToUpper|ToLower|Trim|Replace|Contains|StartsWith|EndsWith|Split|Join|Substring|ToNumber|PadLeft|PadRight|RegexTest|RegexMatch|RegexMatchAll|RegexMatchDetail|RandomString|Length|Append|Prepend|First|Last|IndexOf|Reverse|Slice|Concatenate|Distinct|Sort|Flatten|Range|Skip|Insert|RemoveAt|RemoveFirst|RemoveLast|FlattenOnce|RandomChoice|SortByField|GroupBy|SelectMany|Absolute|Floor|Ceiling|Round|Min|Max|Power|SquareRoot|Log|Sum|Average|Clamp|Median|Mode|RandomInt|Now|Today|ParseDate|FormatDate|DateAdd|DateDiff|DatePart|TypeOf|Coalesce|ToString|ToBoolean|Keys|Values|HasProperty|Merge|Clone|NewGuid|Base64Encode|Base64Decode|FromJson|ToJson|Sleep|Diff|ValidateRequired|ValidateSchema|AnyByField|AllByField|FindByField|WhereByField|Select|Project|Omit|CountIf|Map|Where|Reduce|Each|Find|All|Any|SortBy)(?=\\s*\\()",
+          "captures": {
+            "1": { "name": "support.function.builtin.jyro" }
+          }
+        }
+      ]
+    },
+    "function-calls": {
+      "patterns": [
+        {
+          "match": "\\b([\\p{L}_][\\p{L}\\p{Nd}_]*)(?=[ \\t]*\\()",
+          "captures": {
+            "1": { "name": "entity.name.function.jyro" }
+          }
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.increment.jyro",
+          "match": "\\+\\+|--"
+        },
+        {
+          "name": "keyword.operator.arrow.jyro",
+          "match": "=>"
+        },
+        {
+          "name": "keyword.operator.null-coalescing.jyro",
+          "match": "\\?\\?"
+        },
+        {
+          "name": "keyword.operator.assignment.compound.jyro",
+          "match": "\\+=|-=|\\*=|/=|%=|&="
+        },
+        {
+          "name": "keyword.operator.comparison.jyro",
+          "match": "==|!=|<=|>=|<|>"
+        },
+        {
+          "name": "keyword.operator.arithmetic.jyro",
+          "match": "\\+|-|\\*|/|%"
+        },
+        {
+          "name": "keyword.operator.concatenation.jyro",
+          "match": "&"
+        },
+        {
+          "name": "keyword.operator.assignment.jyro",
+          "match": "="
+        },
+        {
+          "name": "keyword.operator.ternary.jyro",
+          "match": "\\?|:"
+        },
+        {
+          "name": "invalid.illegal.operator.jyro",
+          "match": "!"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.jyro",
+          "match": "\\b[\\p{L}_][\\p{L}\\p{Nd}_]*\\b"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "punctuation.definition.parameters.begin.jyro",
+          "match": "\\("
+        },
+        {
+          "name": "punctuation.definition.parameters.end.jyro",
+          "match": "\\)"
+        },
+        {
+          "name": "punctuation.definition.array.begin.jyro",
+          "match": "\\["
+        },
+        {
+          "name": "punctuation.definition.array.end.jyro",
+          "match": "\\]"
+        },
+        {
+          "name": "punctuation.definition.object.begin.jyro",
+          "match": "\\{"
+        },
+        {
+          "name": "punctuation.definition.object.end.jyro",
+          "match": "\\}"
+        },
+        {
+          "name": "punctuation.separator.comma.jyro",
+          "match": ","
+        },
+        {
+          "name": "punctuation.accessor.jyro",
+          "match": "\\."
+        }
+      ]
+    }
+  }
+}

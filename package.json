@@ -1,0 +1,228 @@
+{
+  "name": "jyro-language",
+  "displayName": "Jyro for VS Code",
+  "description": "Full language server support for the Jyro scripting language",
+  "version": "2.0.0",
+  "publisher": "RealTree-Systems",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RealTree-Systems/jyro-code-lsp"
+  },
+  "bugs": {
+    "url": "https://github.com/RealTree-Systems/jyro-code-lsp/issues"
+  },
+  "homepage": "https://www.jyro.dev",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "jyro",
+    "language-server",
+    "scripting",
+    "data-transformation"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "jyro",
+        "aliases": [
+          "Jyro",
+          "jyro"
+        ],
+        "extensions": [
+          ".jyro"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "jyro",
+        "scopeName": "source.jyro",
+        "path": "./syntaxes/jyro.tmLanguage.json"
+      },
+      {
+        "scopeName": "markdown.jyro.codeblock",
+        "path": "./syntaxes/jyro.markdown.tmLanguage.json",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.jyro": "jyro"
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "jyro",
+        "path": "./snippets/jyro.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Jyro Language Server",
+      "properties": {
+        "jyro.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the Jyro language server."
+        },
+        "jyro.maxNumberOfProblems": {
+          "scope": "resource",
+          "type": "number",
+          "default": 100,
+          "description": "Controls the maximum number of problems produced by the server."
+        },
+        "jyro.format.indentSize": {
+          "scope": "resource",
+          "type": "number",
+          "default": 4,
+          "description": "Number of spaces for indentation."
+        },
+        "jyro.format.useTabs": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": false,
+          "description": "Use tabs instead of spaces for indentation."
+        },
+        "jyro.warnOnHostFunctions": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": true,
+          "description": "Show informational messages when non-standard host functions are referenced."
+        },
+        "jyro.hostFunctions": {
+          "scope": "window",
+          "type": "array",
+          "default": [],
+          "description": "Additional host function definitions to include in IntelliSense. Contributed by extensions that provide a Jyro runtime host.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "parameters",
+              "returnType",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string",
+                "default": "Host"
+              },
+              "description": {
+                "type": "string"
+              },
+              "returnType": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "type",
+                    "description"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ]
+                    },
+                    "optional": {
+                      "type": "boolean"
+                    },
+                    "defaultValue": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "configurationDefaults": {
+      "editor.tokenColorCustomizations": {
+        "textMateRules": [
+          {
+            "scope": "variable.language.io.jyro",
+            "settings": {
+              "foreground": "#F6AD55"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "clean": "rimraf dist client/out server/out shared/out tsconfig.tsbuildinfo client/tsconfig.tsbuildinfo server/tsconfig.tsbuildinfo shared/tsconfig.tsbuildinfo",
+    "precompile": "npm run clean",
+    "compile": "tsc -b",
+    "compile:esbuild": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "watch:tsc": "tsc -b -w",
+    "package": "npm run clean && npm run compile && node esbuild.js --production",
+    "lint": "eslint ./client/src ./server/src ./shared/src",
+    "generate:stdlib": "node tools/generate-stdlib.mjs",
+    "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+    "publish:marketplace": "vsce publish"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/node": "^20.10.0",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.24.2",
+    "eslint": "^9.0.0",
+    "rimraf": "^6.1.0",
+    "typescript": "^5.3.2",
+    "typescript-eslint": "^8.0.0"
+  }
+}

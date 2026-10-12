@@ -1,0 +1,539 @@
+{
+  "Variable Declaration": {
+    "prefix": "var",
+    "body": [
+      "var ${1:name} = ${2:value}"
+    ],
+    "description": "Declare a variable"
+  },
+  "Variable Declaration with Type": {
+    "prefix": "vart",
+    "body": [
+      "var ${1:name}: ${2|number,string,boolean,object,array,any|} = ${3:value}"
+    ],
+    "description": "Declare a variable with type annotation"
+  },
+  "If-Then-End": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition} then",
+      "\t$0",
+      "end"
+    ],
+    "description": "If statement"
+  },
+  "If-Then-Else-End": {
+    "prefix": "ife",
+    "body": [
+      "if ${1:condition} then",
+      "\t${2:# true branch}",
+      "else",
+      "\t${3:# false branch}",
+      "end"
+    ],
+    "description": "If-else statement"
+  },
+  "If-Else-If-End": {
+    "prefix": "ifeif",
+    "body": [
+      "if ${1:condition1} then",
+      "\t${2:# first branch}",
+      "elseif ${3:condition2} then",
+      "\t${4:# second branch}",
+      "else",
+      "\t${5:# default branch}",
+      "end"
+    ],
+    "description": "If-else-if statement"
+  },
+  "Elseif Clause": {
+    "prefix": "elseif",
+    "body": [
+      "elseif ${1:condition} then",
+      "\t$0"
+    ],
+    "description": "Elseif clause for existing if statement"
+  },
+  "While Loop": {
+    "prefix": "while",
+    "body": [
+      "while ${1:condition} do",
+      "\t$0",
+      "end"
+    ],
+    "description": "While loop"
+  },
+  "For Loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:i} in ${2:0} to ${3:10} do",
+      "\t$0",
+      "end"
+    ],
+    "description": "For loop"
+  },
+  "For Loop with Step": {
+    "prefix": "forby",
+    "body": [
+      "for ${1:i} in ${2:0} to ${3:10} by ${4:2} do",
+      "\t$0",
+      "end"
+    ],
+    "description": "For loop with step"
+  },
+  "For Loop Descending": {
+    "prefix": "fordown",
+    "body": [
+      "for ${1:i} in ${2:10} downto ${3:0} do",
+      "\t$0",
+      "end"
+    ],
+    "description": "For loop descending"
+  },
+  "Foreach Loop": {
+    "prefix": "foreach",
+    "body": [
+      "foreach ${1:item} in ${2:items} do",
+      "\t$0",
+      "end"
+    ],
+    "description": "Foreach loop"
+  },
+  "Foreach with Input": {
+    "prefix": "foreachinput",
+    "body": [
+      "foreach ${1:item} in Input.${2:items} do",
+      "\t$0",
+      "end"
+    ],
+    "description": "Foreach loop over Input property"
+  },
+  "Switch Statement": {
+    "prefix": "switch",
+    "body": [
+      "switch ${1:expression} do",
+      "\tcase ${2:value1} then",
+      "\t\t${3:# case 1}",
+      "\tcase ${4:value2} then",
+      "\t\t${5:# case 2}",
+      "\tdefault then",
+      "\t\t${6:# default}",
+      "end"
+    ],
+    "description": "Switch statement"
+  },
+  "Case Clause": {
+    "prefix": "case",
+    "body": [
+      "case ${1:value} then",
+      "\t$0"
+    ],
+    "description": "Case clause of a switch (a case has no end of its own)"
+  },
+  "Case Clause Multi-value": {
+    "prefix": "casem",
+    "body": [
+      "case ${1:value1}, ${2:value2} then",
+      "\t$0"
+    ],
+    "description": "Case clause with multiple values"
+  },
+  "Default Clause": {
+    "prefix": "defaultcase",
+    "body": [
+      "default then",
+      "\t$0"
+    ],
+    "description": "Default clause of a switch"
+  },
+  "Ternary Operator": {
+    "prefix": "tern",
+    "body": [
+      "${1:condition} ? ${2:trueValue} : ${3:falseValue}"
+    ],
+    "description": "Ternary conditional operator"
+  },
+  "Array Literal": {
+    "prefix": "arr",
+    "body": [
+      "[${1:}]"
+    ],
+    "description": "Array literal"
+  },
+  "Object Literal": {
+    "prefix": "obj",
+    "body": [
+      "{ ${1:\"key\"}: ${2:value} }"
+    ],
+    "description": "Object literal"
+  },
+  "WhereByField": {
+    "prefix": "wherefield",
+    "body": [
+      "WhereByField(${1:items}, \"${2:field}\", \"${3|==,!=,<,>,<=,>=|}\", ${4:value})"
+    ],
+    "description": "Filter array by field condition"
+  },
+  "Sort Array": {
+    "prefix": "sort",
+    "body": [
+      "SortByField(${1:items}, \"${2:field}\", \"${3|asc,desc|}\")"
+    ],
+    "description": "Sort array by field"
+  },
+  "Date Add": {
+    "prefix": "dateadd",
+    "body": [
+      "DateAdd(${1:date}, ${2:amount}, \"${3|day,days,week,weeks,month,months,year,years,hour,hours,minute,minutes,second,seconds|}\")"
+    ],
+    "description": "Add time to a date"
+  },
+  "Date Diff": {
+    "prefix": "datediff",
+    "body": [
+      "DateDiff(${1:startDate}, ${2:endDate}, \"${3|day,days,week,weeks,month,months,year,years,hour,hours,minute,minutes,second,seconds|}\")"
+    ],
+    "description": "Calculate the difference from one date to another"
+  },
+  "Output Assignment": {
+    "prefix": "output",
+    "body": [
+      "Output.${1:property} = ${2:value}"
+    ],
+    "description": "Assign to Output property"
+  },
+  "Input Access": {
+    "prefix": "input",
+    "body": [
+      "Input.${1:property}"
+    ],
+    "description": "Access Input property"
+  },
+  "String ToUpper": {
+    "prefix": "toupper",
+    "body": [
+      "ToUpper(${1:text})"
+    ],
+    "description": "Convert string to uppercase"
+  },
+  "String ToLower": {
+    "prefix": "tolower",
+    "body": [
+      "ToLower(${1:text})"
+    ],
+    "description": "Convert string to lowercase"
+  },
+  "String Split": {
+    "prefix": "split",
+    "body": [
+      "Split(${1:text}, \"${2:delimiter}\")"
+    ],
+    "description": "Split string into array"
+  },
+  "String Join": {
+    "prefix": "join",
+    "body": [
+      "Join(${1:items}, \"${2:separator}\")"
+    ],
+    "description": "Join array into string"
+  },
+  "Array Append": {
+    "prefix": "append",
+    "body": [
+      "Append(${1:items}, ${2:value})"
+    ],
+    "description": "Append value to array"
+  },
+  "Array Length": {
+    "prefix": "length",
+    "body": [
+      "Length(${1:items})"
+    ],
+    "description": "Get array length"
+  },
+  "Now Timestamp": {
+    "prefix": "now",
+    "body": [
+      "Now()"
+    ],
+    "description": "Get current UTC timestamp"
+  },
+  "Today Date": {
+    "prefix": "today",
+    "body": [
+      "Today()"
+    ],
+    "description": "Get current UTC date at midnight"
+  },
+  "TypeOf Check": {
+    "prefix": "typeof",
+    "body": [
+      "TypeOf(${1:value})"
+    ],
+    "description": "Get type of value"
+  },
+  "Return": {
+    "prefix": "return",
+    "body": [
+      "return"
+    ],
+    "description": "Return from a function"
+  },
+  "Return with Value": {
+    "prefix": "returnm",
+    "body": [
+      "return ${1:value}"
+    ],
+    "description": "Return from a function with a value"
+  },
+  "Fail": {
+    "prefix": "fail",
+    "body": [
+      "fail"
+    ],
+    "description": "Fail script execution"
+  },
+  "Fail with Message": {
+    "prefix": "failm",
+    "body": [
+      "fail \"${1:error message}\""
+    ],
+    "description": "Fail script execution with an error message"
+  },
+  "Any": {
+    "prefix": "any",
+    "body": [
+      "Any(${1:items}, ${2:x} => ${3:condition})"
+    ],
+    "description": "Check if any element matches condition"
+  },
+  "All": {
+    "prefix": "all",
+    "body": [
+      "All(${1:items}, ${2:x} => ${3:condition})"
+    ],
+    "description": "Check if all elements match condition"
+  },
+  "Find": {
+    "prefix": "find",
+    "body": [
+      "Find(${1:items}, ${2:x} => ${3:condition})"
+    ],
+    "description": "Find first matching element"
+  },
+  "AnyByField": {
+    "prefix": "anyfield",
+    "body": [
+      "AnyByField(${1:items}, \"${2:field}\", \"${3|==,!=,<,>,<=,>=|}\", ${4:value})"
+    ],
+    "description": "Check if any element matches field condition"
+  },
+  "AllByField": {
+    "prefix": "allfield",
+    "body": [
+      "AllByField(${1:items}, \"${2:field}\", \"${3|==,!=,<,>,<=,>=|}\", ${4:value})"
+    ],
+    "description": "Check if all elements match field condition"
+  },
+  "FindByField": {
+    "prefix": "findfield",
+    "body": [
+      "FindByField(${1:items}, \"${2:field}\", \"${3|==,!=,<,>,<=,>=|}\", ${4:value})"
+    ],
+    "description": "Find first element matching field condition"
+  },
+  "Merge Objects": {
+    "prefix": "merge",
+    "body": [
+      "Merge([${1:object1}, ${2:object2}])"
+    ],
+    "description": "Merge objects (a later object's properties win)"
+  },
+  "Map": {
+    "prefix": "map",
+    "body": [
+      "Map(${1:items}, ${2:x} => ${3:expression})"
+    ],
+    "description": "Transform each element in array"
+  },
+  "Where": {
+    "prefix": "where",
+    "body": [
+      "Where(${1:items}, ${2:x} => ${3:condition})"
+    ],
+    "description": "Filter array by lambda condition"
+  },
+  "Reduce": {
+    "prefix": "reduce",
+    "body": [
+      "Reduce(${1:items}, (${2:acc}, ${3:x}) => ${4:expression}, ${5:initialValue})"
+    ],
+    "description": "Reduce array to single value"
+  },
+  "Each": {
+    "prefix": "each",
+    "body": [
+      "Each(${1:items}, ${2:x} => ${3:expression})"
+    ],
+    "description": "Execute expression for each element"
+  },
+  "SortBy": {
+    "prefix": "sortby",
+    "body": [
+      "SortBy(${1:items}, ${2:x} => ${3:x.field})"
+    ],
+    "description": "Sort array by lambda expression"
+  },
+  "Is Null Check": {
+    "prefix": "isnull",
+    "body": [
+      "${1:value} is null"
+    ],
+    "description": "Check if value is null"
+  },
+  "Is Not Null Check": {
+    "prefix": "isnotnull",
+    "body": [
+      "${1:value} is not null"
+    ],
+    "description": "Check if value is not null"
+  },
+  "Null Coalescing": {
+    "prefix": "??",
+    "body": [
+      "${1:value} ?? ${2:fallback}"
+    ],
+    "description": "Null coalescing operator"
+  },
+  "Select Fields": {
+    "prefix": "select",
+    "body": [
+      "Select(${1:items}, \"${2:field}\")"
+    ],
+    "description": "Extract field from each object"
+  },
+  "Regex Match": {
+    "prefix": "regexmatch",
+    "body": [
+      "RegexMatch(${1:text}, \"${2:pattern}\")"
+    ],
+    "description": "Extract first regex match as string"
+  },
+  "Regex Match All": {
+    "prefix": "regexmatchall",
+    "body": [
+      "RegexMatchAll(${1:text}, \"${2:pattern}\")"
+    ],
+    "description": "Extract all regex matches as array"
+  },
+  "Regex Test": {
+    "prefix": "regextest",
+    "body": [
+      "RegexTest(${1:text}, \"${2:pattern}\")"
+    ],
+    "description": "Test if pattern matches text"
+  },
+  "Function Declaration": {
+    "prefix": "func",
+    "body": [
+      "func ${1:Name}(${2:params})",
+      "\t$0",
+      "end"
+    ],
+    "description": "User-defined function"
+  },
+  "Function with Return": {
+    "prefix": "funcr",
+    "body": [
+      "func ${1:Name}(${2:params})",
+      "\treturn ${3:value}",
+      "end"
+    ],
+    "description": "User-defined function with return"
+  },
+  "Function with Defaults": {
+    "prefix": "funcd",
+    "body": [
+      "func ${1:Name}(${2:param}: ${3:string}, ${4:optParam} = ${5:0})",
+      "\t$0",
+      "end"
+    ],
+    "description": "User-defined function with default parameter values"
+  },
+  "Function with Defaults and Return": {
+    "prefix": "funcrd",
+    "body": [
+      "func ${1:Name}(${2:param}: ${3:string}, ${4:optParam} = ${5:0})",
+      "\treturn ${6:value}",
+      "end"
+    ],
+    "description": "User-defined function with default parameters and return"
+  },
+  "Union Declaration": {
+    "prefix": "union",
+    "body": [
+      "union ${1:Name}",
+      "\t${2:Variant1}(${3:field}: ${4|number,string,boolean,object,array,any|})",
+      "\t${5:Variant2}(${6:field})",
+      "end"
+    ],
+    "description": "Discriminated union type"
+  },
+  "Match Statement": {
+    "prefix": "match",
+    "body": [
+      "match ${1:expression} do",
+      "\tcase ${2:Variant1}(${3:bindings}) then",
+      "\t\t$0",
+      "\tcase ${4:Variant2}(${5:bindings}) then",
+      "\t\t",
+      "end"
+    ],
+    "description": "Match statement: one case for each variant of the union"
+  },
+  "Match Expression": {
+    "prefix": "matchexpr",
+    "body": [
+      "match ${1:expression} do",
+      "\tcase ${2:Variant1}(${3:bindings}) then ${4:value1}",
+      "\tcase ${5:Variant2}(${6:bindings}) then ${7:value2}",
+      "end"
+    ],
+    "description": "Match expression (inline variant dispatch)"
+  },
+  "Exit": {
+    "prefix": "exit",
+    "body": [
+      "exit"
+    ],
+    "description": "Exit the script cleanly"
+  },
+  "Exit with Message": {
+    "prefix": "exitm",
+    "body": [
+      "exit ${1:value}"
+    ],
+    "description": "Exit the script with a value"
+  },
+  "Regex Match Detail": {
+    "prefix": "regexmatchdetail",
+    "body": [
+      "RegexMatchDetail(${1:text}, \"${2:pattern}\")"
+    ],
+    "description": "Extract the first match with its index and groups"
+  },
+  "Delete Property": {
+    "prefix": "delete",
+    "body": [
+      "delete ${1:obj}.${2:property}"
+    ],
+    "description": "Delete a property from an object"
+  },
+  "Delete Bracket": {
+    "prefix": "deleteb",
+    "body": [
+      "delete ${1:obj}[${2:key}]"
+    ],
+    "description": "Delete a property from an object using bracket notation"
+  }
+}
