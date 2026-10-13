@@ -40,7 +40,7 @@ The extension parses and checks a script as Jyro's compiler does, and reports th
 - **Unreachable code** after `return`, `fail`, `exit`, `break` or `continue` is faded
 
 ### Standard Library
-The standard library's signatures and documentation are generated from Jyro itself, so they match the compiler. To regenerate them from a Jyro checkout (by default `../jyro`):
+The standard library's signatures and documentation are generated from Jyro itself, so they always match the compiler.
 
 ```powershell
 npm run generate:stdlib -- C:\path\to\jyro
@@ -112,15 +112,6 @@ npm run watch
 npm run lint
 ```
 
-### Publishing
-
-Publishing needs [`vsce`](https://github.com/microsoft/vscode-vsce) and a personal access token for the `RealTree-Systems` publisher (`vsce login RealTree-Systems`). Raise `version` in `package.json`, then:
-
-```powershell
-npx vsce package    # build the .vsix to check it
-npx vsce publish    # build and publish to the Marketplace
-```
-
 ### Project Structure
 
 ```
@@ -142,11 +133,11 @@ Jyro is a secure, sandboxed imperative scripting language designed for .NET 8+ t
 - Safe execution of user-provided scripts
 - Integration with .NET applications
 
-Learn more at [jyro.dev](https://www.jyro.dev) or [support.realtree.cloud/articles/jyro/overview](https://support.realtree.cloud/articles/jyro/overview)
+Learn more at [jyro.dev](https://www.jyro.dev)
 
 ## License
 
-MIT License - Copyright (c) 2025-2026 RealTree Systems
+MIT License - Copyright (c) 2026 RealTree Systems
 
 ## Contributing
 
@@ -156,5 +147,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 For information, issues and feature requests, please visit:
 - [GitHub Issues](https://github.com/RealTree-Systems/jyro-code-lsp/issues)
-- [Jyro Documentation](https://support.realtree.cloud/articles/jyro/overview)
+- [Jyro Documentation](https://www.jyro.dev/docs/getting-started/introduction)
 - [Jyro Website](https://www.jyro.dev)
+- [Jyro Playpen](https://try.jyro.dev)
