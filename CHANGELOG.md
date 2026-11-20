@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- No changes; republished with the new Microsoft sign-in publishing process.
+
 ## 2.0.0
 
 - Brought up to the finalised Jyro language: the parser, validator, highlighting, snippets and editing rules follow the language as Jyro's compiler now implements it.
