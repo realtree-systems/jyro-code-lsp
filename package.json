@@ -213,7 +213,7 @@
     "lint": "eslint ./client/src ./server/src ./shared/src",
     "generate:stdlib": "node tools/generate-stdlib.mjs",
     "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
-    "publish:marketplace": "vsce publish"
+    "publish:marketplace": "vsce publish --azure-credential"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
